@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfMapControls", "WpfMapControls\WpfMapControls.csproj", "{C2000FFD-82AB-4686-966E-7FEFDEE4F398}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C2000FFD-82AB-4686-966E-7FEFDEE4F398}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2000FFD-82AB-4686-966E-7FEFDEE4F398}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2000FFD-82AB-4686-966E-7FEFDEE4F398}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2000FFD-82AB-4686-966E-7FEFDEE4F398}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14D24DC2-B46E-4CDA-8159-39EF2C81AEF6}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,379 @@
+﻿<Window Loaded="Window_Loaded"
+          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+           xmlns:map="clr-namespace:MapControl;assembly=MapControl.WPF"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        
+        
+        
+        xmlns:local="clr-namespace:WpfMapControls"
+        
+        xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="WpfMapControls.MainWindow"
+        
+        Title="Varna Traffic Mk3" Height="718" Width="1109"
+        
+        WindowStyle="None"
+        
+        WindowState="Maximized"
+        >
+
+    <Window.Resources>
+
+        <local:TabSizeConverter x:Key="tabSizeConverter"/>
+
+
+
+        <Style TargetType="Button" x:Key="MinimizeBtn">
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Label Name="Lb" Background="#1d2129" Foreground="White">
+                            <ContentPresenter  x:Name="ContentSite" Margin="2,2,2,2" VerticalAlignment="Center"
+                              HorizontalAlignment="Center"
+                              ContentSource="Content" 
+                             />
+                        </Label>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Lb" Property="Background" Value="Red"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Lb" Property="Background" Value="#393f4d"/>
+                                <Setter Property="Cursor" Value="Arrow"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TabItem">
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Label Foreground="White" Name="Border" RenderTransformOrigin="0.5,0.5">
+                            <Label.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform AngleX="0"/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Label.RenderTransform>
+                            <ContentPresenter  x:Name="ContentSite" Margin="8,1,8,1" VerticalAlignment="Stretch"
+                              HorizontalAlignment="Center"
+                              ContentSource="Header" 
+                             >
+
+                            </ContentPresenter>
+                        </Label>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#1d2129" />
+
+                            </Trigger>
+
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="#393f4d"/>
+                            </Trigger>
+
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <Style x:Key="Style-TabControl-Main" TargetType="{x:Type TabControl}">
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="TabStripPlacement" Value="Bottom"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabControl}">
+                        <DockPanel>
+                            <Border DockPanel.Dock="Bottom">
+                                <UniformGrid VerticalAlignment="Bottom" x:Name="HeaderPanel" IsItemsHost="True" 
+                                     Rows="1" />
+                            </Border>
+
+                            <Border x:Name="Border"  
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                                <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" />
+                            </Border>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FF393F4D"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+
+        <Style x:Key="ButtonStyling" TargetType="{x:Type Button}">
+
+
+
+            <Setter Property="FontFamily" Value="Bahnschrift"/>
+            <Setter Property="Padding" Value="10,10,10,10"/>
+            <Setter Property="Background" Value="#FF393F4D"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="Foreground" Value="#FFD6D6D6"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Name="border"  BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Border.Background>
+                                <SolidColorBrush x:Name="Brush" Color="#FF393F4D"/>
+                            </Border.Background>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <!-- <Setter Property="Background" TargetName="border" Value="#FF393F4D"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{x:Null}"/>  -->
+
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation 
+                  Storyboard.TargetName="Brush" 
+                  Storyboard.TargetProperty="Color"
+                  To="#1d2129" Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation 
+                  Storyboard.TargetName="Brush" 
+                  Storyboard.TargetProperty="Color"
+                  To="#FF393F4D" Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+
+
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#27334e"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{x:Null}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+
+
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+
+    <Grid Margin="0,0,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" x:Name="Cl" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <DockPanel x:Name="UIDockPanel" Grid.Column="0" Margin="0,0"  HorizontalAlignment="Stretch">
+            <!--<TextBlock x:Name="DemoTextBlock" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+-->
+            <TabControl Background="#1d2129" BorderThickness="0" Margin="0,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="BLUE" TabStripPlacement="Bottom" Style="{StaticResource Style-TabControl-Main}">
+                <TabItem  Header="Bus Lines" RenderTransformOrigin="0.5,0.5">
+
+                    <TabItem.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleX="0"/>
+                            <RotateTransform Angle="0"/>
+                            <TranslateTransform X="0"/>
+                        </TransformGroup>
+                    </TabItem.RenderTransform>
+                    <StackPanel>
+                        <Label Background="#FF393F4D" HorizontalContentAlignment="Center" Padding="0,10,0,10" Foreground="#FFECECEC" FontSize="18" FontFamily="Arial" FontWeight="Bold">
+                            <Label.Effect>
+                                <DropShadowEffect ShadowDepth="0" BlurRadius="5"/>
+                            </Label.Effect> Varna Traffic Mk3
+                        </Label>
+                        <Grid Margin="0,10,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" Click="Button_Click" Style="{DynamicResource ButtonStyling}" Content="Calculate" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="5,0,2.5,0" FontFamily="Bahnschrift" Padding="1,10,1,10" Grid.IsSharedSizeScope="True">
+                                <Button.Effect>
+                                    <DropShadowEffect ShadowDepth="3" BlurRadius="5"/>
+                                </Button.Effect>
+                            </Button>
+
+                            <Button Grid.Column="1" Style="{DynamicResource ButtonStyling}" Content="Clear" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="2.5,0,5,0" FontFamily="Bahnschrift" Padding="1,10,1,10" Grid.IsSharedSizeScope="True" Click="Button_Click_1">
+                                <Button.Effect>
+                                    <DropShadowEffect ShadowDepth="3" BlurRadius="5"/>
+                                </Button.Effect>
+                            </Button>
+                        </Grid>
+                        <Label Content="Start" Foreground="#FFD6D6D6" Margin="5,0,5,0" HorizontalAlignment="Stretch" Background="#FF393F4D" FontFamily="Bahnschrift" FontWeight="Bold" Height="21"/>
+                        <Label x:Name="StartLabel" Content="" BorderThickness="1,0,1,1" Margin="5,0,5,0" BorderBrush="#FF393F4D" Height="40" Foreground="#FFD2D2D2" VerticalContentAlignment="Center" FontFamily="Bahnschrift" FontWeight="Bold"/>
+                        <Label Content="Final" Foreground="#FFD6D6D6" Background="#FF393F4D" FontFamily="Bahnschrift" FontWeight="Bold" Height="21" Margin="5,10,5,0"/>
+                        <Label x:Name="FinalLabel" Content="" BorderThickness="1,0,1,1" BorderBrush="#FF393F4D" Height="40" Margin="5,0,5,0" Foreground="#FFDADADA" VerticalContentAlignment="Center" FontFamily="Bahnschrift" FontWeight="Bold"/>
+                        <ListBox x:Name="BusStopList" Height="263" av:ItemsSource="{av:SampleData ItemCount=5}" Margin="5,10,5,0" Background="#FF1D2129" BorderBrush="#FF393F4D" Foreground="#FFCACBCC" HorizontalAlignment="Stretch">
+                            <ListBox.Effect>
+                                <DropShadowEffect ShadowDepth="3" BlurRadius="5"/>
+                            </ListBox.Effect>
+                        </ListBox>
+                        <Label Content="Line" Foreground="#FFD6D6D6" Background="#FF393F4D" FontFamily="Bahnschrift" FontWeight="Bold" Height="21" Margin="5,10,5,0"/>
+                        <Label x:Name="LineLabel" Content="" BorderThickness="1,0,1,1" BorderBrush="#FF393F4D" Height="40" Foreground="#FFDADADA" Margin="5,0,5,0" FontFamily="Bahnschrift" FontWeight="Bold" VerticalContentAlignment="Center"/>
+                        <Label Content="Data" Foreground="#FFD6D6D6" Background="#FF393F4D" FontFamily="Bahnschrift" FontWeight="Bold" Height="21" Margin="5,10,5,0"/>
+                        <Label x:Name="DataLabel" Content="" BorderThickness="1,0,1,1" BorderBrush="#FF393F4D" Height="40" Foreground="#FFDADADA" FontFamily="Bahnschrift" FontWeight="Bold" VerticalContentAlignment="Center" Margin="5,0,5,0"/>
+                        <Button Style="{DynamicResource ButtonStyling}" Content="Map Mode" HorizontalAlignment="Left" Margin="5,10,0,0" Click="Button_Click_2">
+                            <Button.Effect>
+                                <DropShadowEffect ShadowDepth="3" BlurRadius="5"/>
+                            </Button.Effect>
+                        </Button>
+
+                    </StackPanel>
+
+                </TabItem>
+                <TabItem Header="Admins" RenderTransformOrigin="0.5,0.5" >
+                    <TabItem.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleX="0"/>
+                            <RotateTransform Angle="0"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TabItem.RenderTransform>
+                    <StackPanel>
+                        <StackPanel Height="50" Orientation="Horizontal">
+                            <Label VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+
+                            </Label>
+                            <TextBox x:Name="BusLaneTextBox" TextWrapping="NoWrap" Text="BusLine" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <TextBox x:Name="ProgramNameTextBox" TextWrapping="Wrap" Text="ProgramName" Margin="10,10,10,10"/>
+                        <TextBox x:Name="LabelTextBox" TextWrapping="Wrap" Text="Label" Margin="10,10,10,10"/>
+
+                        <Button Content="Add BusStop" Click="AddStopButtonClick" Margin="20,10,20,10" IsEnabled="False"/>
+
+                        <Button Content="SAVE" HorizontalAlignment="Left" Background="#FF73BD42" Click="SaveButtonClick" Margin="20,10,0,10" IsEnabled="False"/>
+                        <Button Name="zoro" Content="Check" Click="CheckButtonClick" Margin="20,10,0,10" HorizontalAlignment="Left">
+                            <Button.Triggers>
+                                <!-- Animates the rectangle's opacity. -->
+                                <EventTrigger RoutedEvent="ButtonBase.Click">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                    Storyboard.TargetName="zoro" 
+                                    Storyboard.TargetProperty="Opacity"
+                                    From="1.0" To="0.0" Duration="0:0:0:0.4" 
+                                    AutoReverse="True" RepeatBehavior="Forever" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Button.Triggers>
+
+                        </Button>
+                        <Label  Margin="20,0,0,0" x:Name="Check1" HorizontalAlignment="Left" FontWeight="Bold" Foreground="White">SlujebnoIme</Label>
+                        <Label  Margin="20,0,0,0" x:Name="Check2" HorizontalAlignment="Left" FontWeight="Bold" Foreground="White">Vidimo za potrebitel ime</Label>
+                        <Button Content="Clear path" HorizontalAlignment="Left" Margin="20,10,0,0"/>
+                    </StackPanel>
+
+                </TabItem>
+                <TabItem Header="Edit" RenderTransformOrigin="0.5,0.5">
+                    <StackPanel  Orientation="Horizontal">
+                        <StackPanel></StackPanel>
+                        <ToggleButton x:Name="Toggle" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="20,20,20,0">TOGGLE EDIT</ToggleButton>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+            <!--
+            <Rectangle
+  Name="MyRectangle"
+  Width="100" 
+  Height="100"
+  Fill="Blue">
+                <Rectangle.Triggers>
+                    // Animates the rectangle's opacity.
+                    <EventTrigger RoutedEvent="Rectangle.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+            Storyboard.TargetName="MyRectangle" 
+            Storyboard.TargetProperty="Opacity"
+            From="1.0" To="0.0" Duration="0:0:5" 
+            AutoReverse="True" RepeatBehavior="Forever" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Rectangle.Triggers>
+            </Rectangle> 
+       -->
+        </DockPanel>
+
+        <m:Map 
+            Center="43.203622, 27.912584"
+            ZoomLevel="12"
+            
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Stretch"
+            Background="#dedede"
+            Grid.Column="1" 
+            MouseRightButtonDown="MainMap_MouseLeftButtonDown" 
+            MouseDoubleClick="MainMap_MouseDoubleClick"
+            x:Name="MainMap" 
+            CredentialsProvider="Au1qF3-RmEKTs2aAiGvmGvpDVBcg-KD5tp1pdbRUM4qGMvBdMAHccJgFOyddKMVr" 
+            
+            Mode="Road" 
+            Cursor="Cross"
+            Margin="0,0,0,0"
+            >
+            <m:Pushpin x:Name="Pushpin_A"  Location="41,21" Content="A" Background="#FFFF0404"/>
+            <m:Pushpin x:Name="Pushpin_B" Location="40,20" Content="B" Background="Blue"/>
+            <Button Content="+/-" ButtonBase.Click="Minimize" Style="{StaticResource MinimizeBtn }" Background="#1d2129" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="Bold">
+
+            </Button>
+        </m:Map>
+
+
+
+    </Grid>
+</Window>

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Fdeweee+wL9m6JKNSxHZfrF8pOGq1L1FOOC558EZpOTeALylYGXDCYfVtwqncXmV2KS/J9V5e8i+JCwCTZqugg==",
+  "dgSpecHash": "hT02e6j1gtkZsHBB7YbOZEjIJL7E/9AMeqHKfP/hHtuXIkndApgNXeQrBwHbCLW2XJ+lB+KZCPY10iTiXUkDfQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\marti\\source\\repos\\WpfMapControls\\WpfMapControls\\WpfMapControls.csproj",
+  "projectFilePath": "E:\\WpfMapControls\\WpfMapControls\\WpfMapControls.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\marti\\.nuget\\packages\\materialdesigncolors\\2.0.6\\materialdesigncolors.2.0.6.nupkg.sha512",
     "C:\\Users\\marti\\.nuget\\packages\\materialdesignthemes\\4.5.0\\materialdesignthemes.4.5.0.nupkg.sha512",
@@ -22,7 +22,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Microsoft.Maps.MapControl.WPF 1.0.0.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
+      "message": "Package 'Microsoft.Maps.MapControl.WPF 1.0.0.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
       "libraryId": "Microsoft.Maps.MapControl.WPF",
       "targetGraphs": [
         "net6.0-windows7.0"

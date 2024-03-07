@@ -35,14 +35,6 @@ namespace WpfMapControls
         private const string KEY = "Au1qF3-RmEKTs2aAiGvmGvpDVBcg-KD5tp1pdbRUM4qGMvBdMAHccJgFOyddKMVr";
         public const string FILE_NAME = "lineToStopsListData";
 
-        /*private const int GWL_STYLE = -16;
-        private const int WS_SYSMENU = 0x80000;
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
-        [DllImport("user32.dll")]
-        private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);*/
-        /////////////////////////////////
-
         public Dictionary<int, List<BusStop>> lineToStopsList = new();
 
         public string? sessionKey;
@@ -50,11 +42,6 @@ namespace WpfMapControls
         {
             InitializeComponent();
 
-            
-
-
-
-            ///Get data from JSON
             try
             {
                 FileStream stream = new FileStream(FILE_NAME, FileMode.Open, FileAccess.Read);
@@ -68,62 +55,14 @@ namespace WpfMapControls
             {
                 //DemoTextBlock.Text = e.Message;
             }
-            //Pushpin.Template = FindResource("PushpinControlTemplate") as System.Windows.Controls.ControlTemplate;
-
-/*
-            string sessionKey = "f";
-            MainMap.CredentialsProvider.GetCredentials((c) =>
-            {
-                sessionKey = c.ApplicationId;
-
-
-                
-
-            });
-            */
-            //BusStopList.Items.Add(sessionKey);
-            
-            string from = "Varna";
-            string to = "Dobrich";
-
-            //MainMap.Children.Add(new Pushpin() { Location = from }) ;
-
-            
-            
-
-
-
         }
-        /// <summary>
-        /// Auto method for GET requests
-        /// </summary>
-        /// <param name="uri"></param>
-        /// <param name="callback"></param>
-      
-
-        /// <summary>
-        /// Moving the PushPoint on MouseRightClick
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
        
-
-        /// <summary>
-        /// Removing the Close Button
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var hwnd = new WindowInteropHelper(this).Handle;
             //SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~WS_SYSMENU);
         }
 
-        /// <summary>
-        /// Adding stops to the List Button
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void AddStopButtonClick(object sender, RoutedEventArgs e)
         {
             int BusLine = int.Parse(BusLaneTextBox.Text);
@@ -159,12 +98,6 @@ namespace WpfMapControls
             }
         }
 
-
-        /// <summary>
-        /// Saving data to JSON
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void SaveButtonClick(object sender, RoutedEventArgs e)
         {
             FileStream stream = new FileStream(FILE_NAME, FileMode.Create,FileAccess.ReadWrite);
@@ -221,9 +154,7 @@ namespace WpfMapControls
         
     }
 
-       
-
-        private void Minimize(object sender, RoutedEventArgs e)
+      private void Minimize(object sender, RoutedEventArgs e)
         {
             if(this.WindowState == WindowState.Normal)
             {

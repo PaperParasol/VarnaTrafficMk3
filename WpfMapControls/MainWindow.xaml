@@ -11,7 +11,7 @@
         
         xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="WpfMapControls.MainWindow"
         
-        Title="Varna Traffic Mk3" Height="718" Width="1109"
+        Title="Bus Routes" Height="718" Width="1109"
         
         WindowStyle="None"
         
@@ -232,7 +232,7 @@
                         <Label Background="#FF393F4D" HorizontalContentAlignment="Center" Padding="0,10,0,10" Foreground="#FFECECEC" FontSize="18" FontFamily="Arial" FontWeight="Bold">
                             <Label.Effect>
                                 <DropShadowEffect ShadowDepth="0" BlurRadius="5"/>
-                            </Label.Effect> Varna Traffic Mk3
+                            </Label.Effect> Bus Routes
                         </Label>
                         <Grid Margin="0,10,0,10">
                             <Grid.ColumnDefinitions>
